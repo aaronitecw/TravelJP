@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Tokyo</title>
+
+  <!-- PWA / Mobile Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00f3ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cyber Tokyo">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => console.log('SW Registered!', reg))
+          .catch(err => console.log('SW Failed', err));
+      });
+    }
+  </script>
+</head>
+
+<body>
+
+  <header class="app-header">
+    <div class="header-top"
+      style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 600px; margin: 0 auto; position: relative;">
+      <h1 class="app-title neon-text" style="flex: 1; text-align: center;">
+        <i data-lucide="sparkles" style="color: var(--accent-purple)"></i>
+        Cyber Tokyo
+        <i data-lucide="sparkles" style="color: var(--accent-cyan)"></i>
+      </h1>
+      <button id="btn-install" class="btn-install hidden" onclick="window.app.installPWA()">
+        <i data-lucide="download" width="18"></i>
+      </button>
+    </div>
+    <p class="app-subtitle">Traveler's Phrasebook</p>
+  </header>
+
+  <main id="app-content">
+    <!-- Views will be rendered here -->
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="window.app.navigateTo('home')">
+      <i data-lucide="home"></i>
+      <span class="nav-label">Situations</span>
+    </button>
+    <button class="nav-btn" id="nav-saved" onclick="window.app.navigateTo('saved')">
+      <i data-lucide="bookmark"></i>
+      <span class="nav-label">Saved</span>
+    </button>
+    <button class="nav-btn" id="nav-translator" onclick="window.app.navigateTo('translator')">
+      <i data-lucide="languages"></i>
+      <span class="nav-label">Translate</span>
+    </button>
+  </nav>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
